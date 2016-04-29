@@ -29,8 +29,8 @@ public class JavaHttpServer {
             // create new HttpServer object and binds it to port 5555 and localhost address; 0 is the backlog (?)
             HttpServer httpServer = HttpServer.create(new InetSocketAddress(5555), 0);
 
-            // create a new context, /image. contexts are used to access different objects hosted by the server.
-            // new ImageHandler() is to show httpServer what class is to be used when /image is accessed. 
+            // create new contexts for /video and /audio. contexts are used to access different contexts hosted by the server.
+            // new VideoHandler() is to show httpServer what class is to be used when /video is accessed. 
             httpServer.createContext("/video", new VideoHandler());
             httpServer.createContext("/audio", new AudioHandler());
 
@@ -44,13 +44,14 @@ public class JavaHttpServer {
     }
 
     /*
-       ImageHandler class handles the /image context by implementing HttpHandler interface.
+       VideoHandler class handles the /video context by implementing HttpHandler interface.
        It must implement the handle method.
      */
     static class VideoHandler implements HttpHandler {
 
         /*
-            Handles access to the /video1 context. HttpExchange encapslates an http request
+            Handles access to the /video context. Plays a video file.
+            HttpExchange encapslates an http request
             and response in one exchange. It has methods for examining the request and 
             generating a response. 
          */
@@ -92,6 +93,9 @@ public class JavaHttpServer {
         }
     }
     
+    /*
+    	AudioHandler handles the /audio context. Simply plays an audio file
+    */
     static class AudioHandler implements HttpHandler {
 
         
